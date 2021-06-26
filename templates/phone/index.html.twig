@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des telephones{% endblock %}
+
+{% block body %}
+  <h1>Liste des telephones</h1>
+  <a  href="{{path('phone_add')}}" class="btn btn-outline-secondary float-right">Ajouter un telephone</a>
+  <table class="table mt-2">
+  <thead>
+    <tr>
+      <th scope="col">Code IMEI</th>
+      <th scope="col">Nom du telephone</th>
+      <th scope="col">Marque</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for phone in phones %}
+    <tr>
+      <th>{{ phone.codeImei }}</th>
+      <td>{{ phone.nom }}</td>
+      <td>{{ phone.marque }}</td>
+      <td>
+        <a href="{{path('phone_show',{'id': phone.id})}}">Voir</a>
+        <a href="{{path('phone_update',{'id': phone.id})}}">Modifier</a>
+        <a href="{{path('phone_delete',{'id': phone.id})}}">supprimer</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

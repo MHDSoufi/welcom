@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}creer un telephone{% endblock %}
+
+{% block body %}
+{% if modif %}
+  <h1>Formulaire de modification</h1>
+{% else %}
+  <h1>Formulaire de creation</h1>
+{% endif %}
+
+  {{form_start(form)}}
+  {{form_row(form.codeImei, {'label' : 'Code IMEI du telephone', 'attr' : {'placeholder
+  ': 'EX : IMEI0349567'}})}}
+  {{form_row(form.marque, {'label' : 'Marque du telephone', 'attr' : {'placeholder
+  ': 'EX : SAMSUNG'}})}}
+  {{form_row(form.nom, {'label' : 'Nom du telephone', 'attr' : {'placeholder
+  ': 'EX : S20'}})}}
+  {{form_row(form.couleur, {'label' : 'Couleur du telephone', 'attr' : {'placeholder
+  ': 'EX : Gold'}})}}
+  {{form_row(form.stockage, {'label' : 'Capacite du telephone', 'attr' : {'placeholder
+  ': 'EX : 16'}})}}
+  <button class="btn btn-lg btn-block {{modif ? "btn-primary" : "btn-success"}}">{{modif ? "Modifier" : "Enregistrer"}}</button>
+  {{form_end(form)}}
+{% endblock %}

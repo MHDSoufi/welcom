@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Phone;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method Phone|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +15,21 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PhoneRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+  private $manager;
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $manager)
     {
         parent::__construct($registry, Phone::class);
+        $this->manager = $manager;
+    }
+
+    public function create(Phone $phone){
+      $this->manager->persist($phone);
+      $this->manager->flush($phone);
+    }
+
+    public function delete(Phone $phone){
+      $this->manager->remove($phone);
+      $this->manager->flush($phone);
     }
 
     // /**
